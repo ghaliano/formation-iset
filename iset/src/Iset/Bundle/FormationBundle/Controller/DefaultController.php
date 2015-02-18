@@ -5,6 +5,7 @@ namespace Iset\Bundle\FormationBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Validator\Constraints as BaseConstraints;
 
 class DefaultController extends Controller
 {
@@ -41,6 +42,38 @@ class DefaultController extends Controller
      */
     public function offreNouveauAction()
     {
-        return array();
+        $form = $this->createFormBuilder()
+            ->add('titre', 'text', array(
+                'constraints' => array(
+                    new BaseConstraints\NotBlank(array("message" => "Cette valeur ne doit pas être vide.")),
+                    new BaseConstraints\Length(array('min' => 5))
+
+                ),
+                'required' => false,
+                'label' => 'Titre de l\'offre'  
+            ))
+            ->add('description', 'textarea')
+            ->add('category', 'choice', array(
+                'empty_value' => 'Choisissez une option',
+                'choices' => array(
+                    'Informatique', 
+                    'Mecanique',
+                    'Economie'
+                )
+            ))
+            ->add('submit', 'submit')
+            ->getForm()
+        ;
+        
+        if ($this->getRequest()->getMethod() == "POST") {
+            $form->submit($this->getRequest());
+            if ($form->isValid()) {
+                
+            }
+        }
+
+        return array(
+            'formulaire' => $form->createView()
+        );
     }
 }

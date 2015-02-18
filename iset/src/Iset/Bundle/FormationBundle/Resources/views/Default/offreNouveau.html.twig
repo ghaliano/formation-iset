@@ -1,0 +1,8 @@
+{% extends "IsetFormationBundle::layout.html.twig" %}
+
+{% block body %}
+
+<form novalidate method="POST" action="{{ path('offre_nouveau') }}">
+	{{ form(formulaire) }}
+</form>
+{% endblock %}
