@@ -34,4 +34,13 @@ class DefaultController extends Controller
         	'result_tan' => $trigo->tan($angle)
     	);
     }
+
+    /**
+     * @Route("/offre/nouveau", name="offre_nouveau")
+     * @Template()
+     */
+    public function offreNouveauAction()
+    {
+        return array();
+    }
 }
