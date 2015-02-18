@@ -1,3 +1,13 @@
+iset_job:
+    resource: "@IsetJobBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+iset_formation:
+    resource: "@IsetFormationBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 app:
     resource: @AppBundle/Controller/
     type:     annotation
