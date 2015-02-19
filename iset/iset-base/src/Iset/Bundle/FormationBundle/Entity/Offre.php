@@ -34,11 +34,7 @@ class Offre
      * @ORM\Column(name="description", type="text")
      */
     private $description;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity="Categorie", inversedBy="offres")
-     */
-    private $categorie;
+
 
     /**
      * Get id
@@ -95,27 +91,4 @@ class Offre
     {
         return $this->description;
     }
-
-    /**
-     * Set categorie
-     *
-     * @param string $categorie
-     * @return Offre
-     */
-    public function setCategorie($categorie)
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
-
-    /**
-     * Get categorie
-     *
-     * @return Category
-     */
-    public function getCategorie()
-    {
-        return $this->categorie;
-    } 
 }

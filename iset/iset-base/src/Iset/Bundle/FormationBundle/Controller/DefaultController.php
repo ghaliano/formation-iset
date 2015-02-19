@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Validator\Constraints as BaseConstraints;
-use Iset\Bundle\FormationBundle\Entity\Offre;
+
 class DefaultController extends Controller
 {
     /**
@@ -42,8 +42,7 @@ class DefaultController extends Controller
      */
     public function offreNouveauAction()
     {
-        $offre = new Offre();
-        $form = $this->createFormBuilder($offre)
+        $form = $this->createFormBuilder()
             ->add('titre', 'text', array(
                 'constraints' => array(
                     new BaseConstraints\NotBlank(array("message" => "Cette valeur ne doit pas être vide.")),
@@ -53,9 +52,13 @@ class DefaultController extends Controller
                 'label' => 'Titre de l\'offre'  
             ))
             ->add('description', 'textarea')
-            ->add('categorie', 'entity', array(
-                'class' => 'IsetFormationBundle:Categorie',
-                'property' => 'titre'
+            ->add('category', 'choice', array(
+                'empty_value' => 'Choisissez une option',
+                'choices' => array(
+                    'Informatique', 
+                    'Mecanique',
+                    'Economie'
+                )
             ))
             ->add('submit', 'submit')
             ->getForm()
@@ -65,23 +68,7 @@ class DefaultController extends Controller
             //Binding des données
             $form->submit($this->getRequest());
             if ($form->isValid()) {
-                //lappel au service doctrine
-                $em = $this->getDoctrine()->getManager();
-                //Préparrer l'ordre sql'
-                $em->persist($offre);
-                //éxécuter la requette
-                $em->flush();
-                //Ajouter une information de success dans la session
-                $this->getRequest()->getSession()->getFlashBag()->add(
-                    'success', 'Offre inséré avec succes'
-                );
-                $this->getRequest()->getSession()->getFlashBag()->add(
-                    'error', 'Redirection vers page accueil'
-                );
-                
-                return $this->redirect(
-                    $this->generateUrl('page_accueil')
-                );
+
             }
         }
 

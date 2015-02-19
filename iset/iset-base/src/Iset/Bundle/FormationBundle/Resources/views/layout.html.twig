@@ -1,0 +1,23 @@
+<html>
+<body>
+{% block header %}
+<div id="header">
+	<div id="logo">
+	<strong>Site d'offre D'emploi</strong>
+	</div>
+</div>
+{% endblock %}
+<div id="menu">
+<a href="{{ path('page_accueil') }}">Accueil</a>
+<a href="{{ path('offre_nouveau') }}">Ajouter une offre</a>
+</div>
+{% block body %}
+
+{% endblock %}
+{% block footer %}
+<div id="footer">
+	droit d'auteur iset sousse 2015
+</div>
+{% endblock %}
+</body>
+</html>

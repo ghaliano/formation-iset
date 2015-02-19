@@ -1,14 +1,9 @@
 {% extends "IsetFormationBundle::layout.html.twig" %}
 
 {% block header %}
+
 {% endblock %}
 
 {% block body %}
-
-{% for message in app.request.session.getFlashBag.get('success') %}
-	{{ message }}<br />
-{% endfor %}
-
-<br />
 Hello iset-sousse
 {% endblock %}
