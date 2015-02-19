@@ -1,23 +1,100 @@
 <html>
+<head>
+  <link rel="stylesheet" type="text/css" 
+  href="bundles/isetformation/js/bootstrap/css/bootstrap.css" media="screen" />
+  <script src="bundles/isetformation/js/jquery.js"></script>
+  <script src="bundles/isetformation/js/bootstrap/js/bootstrap.js"></script>
+</head>
 <body>
-{% block header %}
-<div id="header">
-	<div id="logo">
-	<strong>Site d'offre D'emploi</strong>
-	</div>
-</div>
-{% endblock %}
-<div id="menu">
-<a href="{{ path('page_accueil') }}">Accueil</a>
-<a href="{{ path('offre_nouveau') }}">Ajouter une offre</a>
-</div>
-{% block body %}
 
-{% endblock %}
-{% block footer %}
-<div id="footer">
-	droit d'auteur iset sousse 2015
-</div>
-{% endblock %}
-</body>
-</html>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="{{ path('page_accueil') }}">Accueil</a></li>
+        <li><a href="{{ path('offre_accueil') }}">Liste des offres</a></li>
+        <li><a href="{{ path('offre_nouveau') }}">Ajouter une offre</a></li>
+      </ul>
+      <form class="navbar-form navbar-left" role="search" action="{{ path('offre_accueil') }}" method="GET">
+        <div class="form-group">
+          <input type="text" class="form-control" name="motcle" value="" placeHolder="Recherche"/>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+    <div class="container">
+
+      <div class="blog-header">
+        <h1 class="blog-title">
+        	{% block title %}
+        	{% endblock %}
+        </h1>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+            {% block body %}
+            {% endblock %}
+        </div>
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>About</h4>
+            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+          </div>
+          <div class="sidebar-module">
+            <h4>Archives</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">March 2014</a></li>
+              <li><a href="#">February 2014</a></li>
+              <li><a href="#">January 2014</a></li>
+              <li><a href="#">December 2013</a></li>
+              <li><a href="#">November 2013</a></li>
+              <li><a href="#">October 2013</a></li>
+              <li><a href="#">September 2013</a></li>
+              <li><a href="#">August 2013</a></li>
+              <li><a href="#">July 2013</a></li>
+              <li><a href="#">June 2013</a></li>
+              <li><a href="#">May 2013</a></li>
+              <li><a href="#">April 2013</a></li>
+            </ol>
+          </div>
+          <div class="sidebar-module">
+            <h4>Elsewhere</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">GitHub</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Facebook</a></li>
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <footer class="blog-footer">
+      <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
+
+  </body></html>

@@ -41,6 +41,18 @@ class Offre
     private $categorie;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="date_creation", type="datetime")
+     */
+    private $dateCreation;
+
+    public function __construct()
+    {
+        $this->dateCreation = new \DateTime('now');
+    }
+
+    /**
      * Get id
      *
      * @return integer 
@@ -71,6 +83,29 @@ class Offre
     public function getTitre()
     {
         return $this->titre;
+    }
+
+    /**
+     * Set dateCreation
+     *
+     * @param string $dateCreation
+     * @return Offre
+     */
+    public function setDateCreation($dateCreation)
+    {
+        $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+
+    /**
+     * Get dateCreation
+     *
+     * @return string 
+     */
+    public function getDateCreation()
+    {
+        return $this->dateCreation;
     }
 
     /**

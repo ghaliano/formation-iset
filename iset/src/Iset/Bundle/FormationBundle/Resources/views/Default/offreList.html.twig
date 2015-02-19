@@ -1,0 +1,26 @@
+{% extends "IsetFormationBundle::layout.html.twig" %}
+
+{% block title %}
+Liste des offres
+{% endblock %}
+
+{% block body %}
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Titre</th>
+			<th>Date de création</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for offre in offres %}
+	<tr>
+		<td>{{ offre.titre }}</td>
+		<td>{{ offre.dateCreation|date("m/d/Y") }} </td>
+		<td><a href="{{ path('offre_detail', {id: offre.id}) }}">Détail</a></td>
+	</tr>
+	{% endfor %}
+	</tbody>
+</table>
+{% endblock %}

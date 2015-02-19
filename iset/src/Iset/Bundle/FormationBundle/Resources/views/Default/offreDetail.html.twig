@@ -1,0 +1,10 @@
+{% extends "IsetFormationBundle::layout.html.twig" %}
+
+{% block title %}
+Detail de l'offre "{{ offre.titre }}"
+{% endblock %}
+
+{% block body %}
+Detail de l'offre "{{ offre.titre }}"<br>
+Date d ecréation de l'offre {{ offre.dateCreation|date("m/d/Y") }}
+{% endblock %}

@@ -89,4 +89,36 @@ class DefaultController extends Controller
             'formulaire' => $form->createView()
         );
     }
+
+    /**
+     * @Route("/offre", name="offre_accueil")
+     * @Template()
+     */
+    public function offreListAction()
+    {
+        $filter = array();
+        $motcle = $this->getRequest()->get('motcle');
+        if ($motcle) {
+            $filter['titre'] = $motcle;
+        }
+        $em = $this->getDoctrine()->getManager();
+        $offres = $em->getRepository('IsetFormationBundle:Offre')->findBY(
+            $filter,
+            array('dateCreation' => 'desc')
+        );
+
+        return array('offres' => $offres);
+    }
+
+    /**
+     * @Route("/offre/{id}", name="offre_detail")
+     * @Template()
+     */
+    public function offreDetailAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $offre = $em->getRepository('IsetFormationBundle:Offre')->find($id);
+
+        return array('offre' => $offre);
+    }
 }
