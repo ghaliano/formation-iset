@@ -1,12 +1,37 @@
 security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
     providers:
         in_memory:
-            memory: ~
+            memory:
+                users:
+                    iset:  { password: sousse, roles: [ 'ROLE_USER' ] }
+                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
     firewalls:
+        # On crée un pare-feu uniquement pour le formulaire
+        main_login:
+            # Cette expression régulière permet de prendre /login (mais pas /login_check !)
+            pattern:   ^/login$
+            anonymous: true # On autorise alors les anonymes sur ce pare-feu
         dev:
-            pattern: ^/(_(profiler|wdt|error)|css|images|js)/
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        main:
+            pattern:   ^/
+            anonymous: true
+            provider:  in_memory
+            form_login:
+                login_path: login
+                check_path: login_check
+            logout:
+                path:   logout
+                target: /platform
 
-        default:
-            anonymous: ~
+    access_control:
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }    
