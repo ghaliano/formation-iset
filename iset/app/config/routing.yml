@@ -6,7 +6,3 @@ iset_formation:
     resource: "@IsetFormationBundle/Controller/"
     type:     annotation
     prefix:   /
-
-app:
-    resource: @AppBundle/Controller/
-    type:     annotation
