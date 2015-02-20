@@ -1,7 +1,6 @@
-iset_job:
-    resource: "@IsetJobBundle/Controller/"
-    type:     annotation
-    prefix:   /
+# app/config/routing.yml
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 
 iset_formation:
     resource: "@IsetFormationBundle/Controller/"
