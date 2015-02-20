@@ -7,6 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Validator\Constraints as BaseConstraints;
 use Iset\Bundle\FormationBundle\Entity\Offre;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 class DefaultController extends Controller
 {
     /**
@@ -15,7 +17,23 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+        $this->getRequest()->getSession()->set('_locale', 'fr');
+        
         return array();
+    }
+
+    /**
+     * @Route("/changer-langue/{lng}", name="changer_langue")
+     * @Template()
+     */
+    public function changerLangueAction($lng)
+    {
+        //$this->getRequest()->setLocale($lng);
+        $this->getRequest()->getSession()->set('_locale', $lng);
+
+        return $this->redirect(
+            $this->generateUrl('page_accueil')
+        );
     }
 
     /**
@@ -42,6 +60,10 @@ class DefaultController extends Controller
      */
     public function offreNouveauAction()
     {
+        if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException();
+        }
+
         $offre = new Offre();
         $form = $this->createFormBuilder($offre)
             ->add('titre', 'text', array(

@@ -36,7 +36,7 @@ class Offre
     private $description;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Categorie", inversedBy="offres")
+     * @ORM\ManyToOne(targetEntity="Categorie")
      */
     private $categorie;
 
