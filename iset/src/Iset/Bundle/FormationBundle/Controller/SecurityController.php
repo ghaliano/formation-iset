@@ -17,7 +17,7 @@ class SecurityController extends Controller
   {
     // Si le visiteur est déjà identifié, on le redirige vers l'accueil
     if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-      return $this->redirect($this->generateUrl('oc_platform_accueil'));
+      return $this->redirect($this->generateUrl('page_accueil'));
     }
 
     $session = $request->getSession();
@@ -45,7 +45,7 @@ class SecurityController extends Controller
   {
     // Si le visiteur est déjà identifié, on le redirige vers l'accueil
     if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-      return $this->redirect($this->generateUrl('oc_platform_accueil'));
+      return $this->redirect($this->generateUrl('page_accueil'));
     }
 
     $session = $request->getSession();
